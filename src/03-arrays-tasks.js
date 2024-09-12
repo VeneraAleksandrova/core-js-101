@@ -194,10 +194,14 @@ function getTail(arr, n) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  return arr.reduce((result, current, i, massive) => {
+    if (i < massive.length - 1) {
+      return `${result}${String(current)}\n`;
+    }
+    return `${result}${String(current)}`;
+  }, '');
 }
-
 /**
  * Transforms the numeric array into the according array of squares:
  *   f(x) = x * x
@@ -425,7 +429,8 @@ function sortCitiesArray(arr) {
   return arr.sort((a, b) => {
     if (a.country > b.country) {
       return 1;
-    } if (a.country === b.country) {
+    }
+    if (a.country === b.country) {
       return a.city > b.city ? 1 : -1;
     }
     return -1;
