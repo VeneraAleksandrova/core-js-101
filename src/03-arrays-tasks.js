@@ -393,7 +393,7 @@ function findAllOccurrences(arr, item) {
  * @example
  *    [0, false, 'cat', NaN, true, '']  => '0,false,cat,NaN,true,'
  *    [1, 2, 3, 4, 5]                   => '1,2,3,4,5'
- *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
+ *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'getIdentityMatrix
  */
 function toStringList(arr) {
   return String(arr);
@@ -580,10 +580,26 @@ function getElementByIndexes(arr, indexes) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  let arr2 = [];
+  if (arr.length > 1) {
+    if (arr.length % 2 === 0) {
+      arr2 = arr2.concat(
+        arr.slice(-arr.length / 2),
+        arr.slice(0, arr.length / 2),
+      );
+    } else {
+      arr2 = arr2.concat(
+        arr.slice(-Math.trunc(arr.length / 2)),
+        arr[Math.trunc(arr.length / 2)],
+        arr.slice(0, Math.trunc(arr.length / 2)),
+      );
+    }
+  } else {
+    arr2 = arr;
+  }
+  return arr2;
 }
-
 module.exports = {
   findElement,
   generateOdds,
