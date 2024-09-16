@@ -29,9 +29,11 @@
 function getFizzBuzz(num) {
   if (num % 3 === 0 && num % 5 === 0) {
     return 'FizzBuzz';
-  } if (num % 3 === 0) {
+  }
+  if (num % 3 === 0) {
     return 'Fizz';
-  } if (num % 5 === 0) {
+  }
+  if (num % 5 === 0) {
     return 'Buzz';
   }
   return num;
@@ -169,8 +171,20 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const groupedItems = str
+    .split('')
+    .filter((el) => el.match(/[a-z]/i))
+    .reduce((accumulator, item) => {
+      if (!accumulator[item]) {
+        accumulator[item] = 1;
+      } else {
+        accumulator[item] += 1;
+      }
+      return accumulator;
+    }, {});
+  const result = Object.entries(groupedItems).find(([, value]) => value === 1);
+  return result ? result[0] : null;
 }
 
 /**
