@@ -125,8 +125,8 @@ function isTriangle(a, b, c) {
  */
 function doRectanglesOverlap(rect1, rect2) {
   return (
-    rect2.top < rect1.top + rect1.height
-    && rect2.left < rect1.left + rect1.width
+    rect2.top < rect1.top + rect1.height &&
+    rect2.left < rect1.left + rect1.width
   );
 }
 
@@ -158,8 +158,8 @@ function doRectanglesOverlap(rect1, rect2) {
  */
 function isInsideCircle(circle, point) {
   return (
-    (point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2
-    < circle.radius ** 2
+    (point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2 <
+    circle.radius ** 2
   );
 }
 
@@ -283,9 +283,9 @@ function isCreditCardNumber(ccn) {
         }
         return +el;
       })
-      .reduce((sum, el) => sum + el, 0)
-      % 10
-    === 0
+      .reduce((sum, el) => sum + el, 0) %
+      10 ===
+    0
   );
 }
 
@@ -306,7 +306,7 @@ function isCreditCardNumber(ccn) {
 function getDigitalRoot(num) {
   const result = Array.from(String(num)).reduce(
     (sum, current) => sum + +current,
-    0,
+    0
   );
   return result > 9 ? getDigitalRoot(result) : result;
 }
@@ -342,19 +342,19 @@ function isBracketsBalanced(str) {
   const arr = [];
   str.split('').forEach((el) => {
     if (
-      bracketsConfig.flat().indexOf(el) % 2 !== 0
-      && !arr.includes(
-        bracketsConfig.flat()[bracketsConfig.flat().indexOf(el) - 1],
+      bracketsConfig.flat().indexOf(el) % 2 !== 0 &&
+      !arr.includes(
+        bracketsConfig.flat()[bracketsConfig.flat().indexOf(el) - 1]
       )
     ) {
       arr.push('-');
     } else if (
-      (bracketsConfig.flat().indexOf(el) % 2 !== 0
-        && bracketsConfig.flat().indexOf(el)
-          === bracketsConfig.flat().indexOf(arr[arr.length - 1]) + 1)
-      || (arr.includes(el)
-        && bracketsConfig.flat().lastIndexOf(el) % 2 !== 0
-        && bracketsConfig.flat().indexOf(el) % 2 === 0)
+      (bracketsConfig.flat().indexOf(el) % 2 !== 0 &&
+        bracketsConfig.flat().indexOf(el) ===
+          bracketsConfig.flat().indexOf(arr[arr.length - 1]) + 1) ||
+      (arr.includes(el) &&
+        bracketsConfig.flat().lastIndexOf(el) % 2 !== 0 &&
+        bracketsConfig.flat().indexOf(el) % 2 === 0)
     ) {
       arr.pop();
     } else if (bracketsConfig.flat().indexOf(el) % 2 === 0) {
@@ -402,7 +402,9 @@ function toNaryString(num, n) {
  */
 function getCommonDirectoryPath(pathes) {
   let commonDirectory = '';
-  const path = pathes.map((a) => a.split(/(\/)/g).filter((el, i) => !(i === 0 && el === '')));
+  const path = pathes.map((a) =>
+    a.split(/(\/)/g).filter((el, i) => !(i === 0 && el === ''))
+  );
   path[0].every((common, i) => {
     let x = 0;
     path.forEach((p) => {
@@ -434,8 +436,20 @@ function getCommonDirectoryPath(pathes) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function c(m1, m2) {
+  const arr = [];
+
+  for (let i = 0; i < m1.length; i += 1) {
+    arr.push([]);
+    for (let j = 0; j < m2[i].length; j += 1) {
+      let num = 0;
+      for (let x = 0; x < m1[i].length; x += 1) {
+        num += m1[i][x] * m2[x][j];
+      }
+      arr[i].push(num);
+    }
+  }
+  return arr;
 }
 
 /**
