@@ -397,10 +397,37 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let common = '';
+  const arr = pathes[0].split('');
+  let word = '';
+  arr.every((letter, i, massive) => {
+    let x = 0;
+    word = letter === '/' ? '' : word;
+    pathes.forEach((path) => {
+      if (path[i] === letter) x += 1;
+    });
+    if (x === pathes.length) {
+      if (letter === '/') {
+        common += letter;
+      } else {
+        word += letter;
+      }
+      if (massive[i + 1] === '/') {
+        common += word;
+      }
+      return true;
+    }
+    if (letter === '/' && x !== pathes.length) {
+      common = common.lastIndexOf('/')
+        ? common.slice(0, common.lastIndexOf('/') + 1)
+        : common[0];
+      return false;
+    }
+    return false;
+  });
+  return common;
 }
-
 /**
  * Returns the product of two specified matrixes.
  * See details: https://en.wikipedia.org/wiki/Matrix_multiplication
