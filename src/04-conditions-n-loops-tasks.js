@@ -398,35 +398,20 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-  let common = '';
-  const arr = pathes[0].split('');
-  let word = '';
-  arr.every((letter, i, massive) => {
+  let commonDirectory = '';
+  const path = pathes.map((a) => a.split(/(\/)/g).filter((el, i) => !(i === 0 && el === '')));
+  path[0].every((common, i) => {
     let x = 0;
-    word = letter === '/' ? '' : word;
-    pathes.forEach((path) => {
-      if (path[i] === letter) x += 1;
+    path.forEach((p) => {
+      if (p[i] === common) x += 1;
     });
-    if (x === pathes.length) {
-      if (letter === '/') {
-        common += letter;
-      } else {
-        word += letter;
-      }
-      if (massive[i + 1] === '/') {
-        common += word;
-      }
+    if (x === path.length) {
+      commonDirectory += common;
       return true;
-    }
-    if (letter === '/' && x !== pathes.length) {
-      common = common.lastIndexOf('/')
-        ? common.slice(0, common.lastIndexOf('/') + 1)
-        : common[0];
-      return false;
     }
     return false;
   });
-  return common;
+  return commonDirectory;
 }
 /**
  * Returns the product of two specified matrixes.
